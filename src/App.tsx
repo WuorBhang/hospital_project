@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Activity, Calendar, Users, FileText, Menu, X } from 'lucide-react';
-import Dashboard from './components/Dashboard';
-import Patients from './components/Patients';
-import Appointments from './components/Appointments';
-import Records from './components/Records';
+import Dashboard from './components/Dashboard'; // Ensure this file exists
+import Patients from './components/Patients'; // Ensure this file exists
+import Appointments from './components/Appointments'; // Ensure this file exists
+import Doctors from './components/Doctors'; // Ensure this file exists
+import Records from './components/Records'; // Ensure this file exists
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -13,6 +14,8 @@ function App() {
     switch (activeTab) {
       case 'dashboard':
         return <Dashboard />;
+      case 'doctors':
+        return <Doctors />;
       case 'patients':
         return <Patients />;
       case 'appointments':
@@ -37,6 +40,7 @@ function App() {
             <nav className="mt-8 flex-1 space-y-1 px-2">
               {[
                 { name: 'Dashboard', icon: Activity, id: 'dashboard' },
+                { name: 'Doctors', icon: Users, id: 'doctors' },
                 { name: 'Patients', icon: Users, id: 'patients' },
                 { name: 'Appointments', icon: Calendar, id: 'appointments' },
                 { name: 'Medical Records', icon: FileText, id: 'records' },

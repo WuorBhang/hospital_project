@@ -1,27 +1,175 @@
 import React, { useState } from 'react';
 import { Search, Filter } from 'lucide-react';
 
-const medicalRecords = [
+const patients = [
   {
     id: 1,
-    patient: 'Sarah Johnson',
-    diagnosis: 'Hypertension',
-    symptoms: ['Headache', 'Dizziness', 'High blood pressure'],
-    treatment: 'Prescribed ACE inhibitors',
-    date: '2024-02-15',
-    doctor: 'Dr. Williams',
+    name: 'Sarah Johnson',
+    age: 45,
+    gender: 'Female',
+    condition: 'Hypertension',
+    lastVisit: '2024-02-15',
+    status: 'Stable',
   },
   {
     id: 2,
-    patient: 'Michael Chen',
-    diagnosis: 'Diabetes Type 2',
-    symptoms: ['Frequent urination', 'Increased thirst', 'Fatigue'],
-    treatment: 'Metformin prescribed, dietary changes recommended',
-    date: '2024-02-18',
-    doctor: 'Dr. Martinez',
+    name: 'Michael Chen',
+    age: 62,
+    gender: 'Male',
+    condition: 'Diabetes Type 2',
+    lastVisit: '2024-02-18',
+    status: 'Under Observation',
   },
-  // Add more records as needed
+  {
+    id: 3,
+    name: 'Emily Davis',
+    age: 34,
+    gender: 'Female',
+    condition: 'Asthma',
+    lastVisit: '2024-03-05',
+    status: 'Stable',
+  },
+  {
+    id: 4,
+    name: 'James Smith',
+    age: 50,
+    gender: 'Male',
+    condition: 'Coronary Artery Disease',
+    lastVisit: '2024-01-20',
+    status: 'Critical',
+  },
+  {
+    id: 5,
+    name: 'Olivia Brown',
+    age: 28,
+    gender: 'Female',
+    condition: 'Hyperthyroidism',
+    lastVisit: '2024-03-10',
+    status: 'Stable',
+  },
+  {
+    id: 6,
+    name: 'David Wilson',
+    age: 55,
+    gender: 'Male',
+    condition: 'Chronic Kidney Disease',
+    lastVisit: '2024-02-25',
+    status: 'Under Observation',
+  },
+  {
+    id: 7,
+    name: 'Sophia Taylor',
+    age: 40,
+    gender: 'Female',
+    condition: 'Depression',
+    lastVisit: '2024-02-12',
+    status: 'Stable',
+  },
+  {
+    id: 8,
+    name: 'Daniel Johnson',
+    age: 46,
+    gender: 'Male',
+    condition: 'COPD',
+    lastVisit: '2024-03-15',
+    status: 'Critical',
+  },
+  // Add more patients as needed
 ];
+
+// Create medical records from patients
+const medicalRecords = patients.map((patient) => ({
+  id: patient.id,
+  patient: patient.name,
+  diagnosis: patient.condition,
+  symptoms: getSymptoms(patient.condition),
+  treatment: getTreatment(patient.condition),
+  date: patient.lastVisit,
+  doctor: getDoctor(patient.condition),
+}));
+
+// Function to get symptoms based on condition
+function getSymptoms(condition) {
+  switch (condition) {
+    case 'Hypertension':
+      return ['Headache', 'Dizziness', 'High blood pressure'];
+    case 'Diabetes Type 2':
+      return ['Frequent urination', 'Increased thirst', 'Fatigue'];
+    case 'Asthma':
+      return ['Wheezing', 'Coughing', 'Shortness of breath'];
+    case 'Coronary Artery Disease':
+      return ['Chest pain', 'Shortness of breath', 'Fatigue'];
+    case 'Hyperthyroidism':
+      return ['Rapid heartbeat', 'Weight loss', 'Nervousness'];
+    case 'Chronic Kidney Disease':
+      return ['Fatigue', 'Swelling', 'Nausea'];
+    case 'Depression':
+      return ['Sadness', 'Fatigue', 'Loss of interest'];
+    case 'COPD':
+      return ['Chronic cough', 'Shortness of breath', 'Wheezing'];
+    // Add more conditions as needed
+    default:
+      return [];
+  }
+}
+
+// Function to get treatment based on condition
+function getTreatment(condition) {
+  switch (condition) {
+    case 'Hypertension':
+      return 'Prescribed ACE inhibitors';
+    case 'Diabetes Type 2':
+      return 'Metformin prescribed, dietary changes recommended';
+    case 'Asthma':
+      return 'Inhalers prescribed, lifestyle changes recommended';
+    case 'Coronary Artery Disease':
+      return 'Lifestyle changes, medications prescribed';
+    case 'Hyperthyroidism':
+      return 'Antithyroid medication prescribed';
+    case 'Chronic Kidney Disease':
+      return 'Dietary changes, medication prescribed';
+    case 'Depression':
+      return 'Cognitive Behavioral Therapy recommended';
+    case 'COPD':
+      return 'Bronchodilators and steroids prescribed';
+    // Add more conditions as needed
+    default:
+      return 'No treatment specified';
+  }
+}
+
+// Function to get treating doctor based on condition
+function getDoctor(condition) {
+  switch (condition) {
+    case 'Hypertension':
+      return 'Dr. Williams';
+    case 'Diabetes Type 2':
+      return 'Dr. Martinez';
+    case 'Asthma':
+      return 'Dr. Patel';
+    case 'Coronary Artery Disease':
+      return 'Dr. Thompson';
+    case 'Hyperthyroidism':
+      return 'Dr. Green';
+    case 'Chronic Kidney Disease':
+      return 'Dr. Carter';
+    case 'Depression':
+      return 'Dr. Lewis';
+    case 'COPD':
+      return 'Dr. Wilson';
+    // Add more conditions as needed
+    default:
+      return 'General Practitioner';
+  }
+}
+
+// Total number of records
+const totalRecords = medicalRecords.length;
+
+// Logging the records and total count
+console.log(medicalRecords);
+console.log(`Total Records: ${totalRecords}`);
+
 
 function Records() {
   const [searchTerm, setSearchTerm] = useState('');
